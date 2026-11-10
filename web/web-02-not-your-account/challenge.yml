@@ -1,0 +1,83 @@
+# WEB-02 — Not Your Account
+#
+# Verified against GZ::CTF 1.9.1 (commit 23ccbbaa).
+#
+# GZ::CTF does not import challenge YAML: DynamicContainer challenges are created
+# through the admin UI or /api/Edit/Games/... . This file is the authoritative
+# value set for that configuration; every key under `gzctf` maps to a verified
+# GZ::CTF model property. See organizer/DEPLOYMENT.md for the exact request
+# bodies. This file contains no flag.
+
+id: WEB-02
+name: Not Your Account
+category: Web
+type: DynamicContainer
+difficulty: Easy
+points: 50
+flag_format: "AXUM{...}"
+
+public:
+  description: |
+    Northstar Bank recently launched a new online banking portal for its
+    customers.
+
+    The portal allows customers to log in, review their account information, and
+    inspect recent transactions. The development team believes the application
+    is ready for production.
+
+    However, a security review has raised concerns about how the application
+    retrieves customer account records.
+
+    You've been provided with a test account to investigate the portal.
+
+    **Your objective:** Explore the application, identify the access-control
+    weakness, and retrieve the information belonging to another customer.
+
+    ### Test credentials
+
+    * Username: `alex`
+    * Password: `Northstar@2026`
+
+    ### Hints
+
+    1. Being authenticated does not necessarily mean you're authorized to access
+       every resource.
+    2. Inspect the requests your browser makes when loading account information.
+    3. Pay attention to how the application identifies which account to retrieve.
+
+    Submit the flag you discover.
+
+  credentials:
+    username: alex
+    password: "Northstar@2026"
+
+  # Hints are part of the description above so that every player sees them
+  # together with the scenario. The platform hint list stays empty to avoid
+  # duplication (see gzctf.hints below).
+
+gzctf:
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeCategory.Web
+  category: Web
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double).
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 50
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token
+  # (verified placeholder syntax for GZ::CTF 1.9.1).
+  flagTemplate: "AXUM{not_your_account_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/web-02-not-your-account:1.0.0"
+  # Internal application port; GZ::CTF maps it to a random host port.
+  exposePort: 3000
+  memoryLimit: 128
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+  hints: []

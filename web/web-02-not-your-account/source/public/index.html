@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in — Northstar Bank</title>
+<meta name="description" content="Northstar Bank online banking. Sign in to view your accounts and transactions.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page" data-page="login">
+  <main class="auth-layout">
+    <section class="auth-brand" aria-label="Northstar Bank">
+      <a class="brand brand-light" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 1.6 19.5 12 30 15.5 19.5 19 16 29.4 12.5 19 2 15.5 12.5 12Z" fill="currentColor"/>
+          <circle cx="16" cy="15.6" r="2.5" fill="#0a1f3c"/>
+        </svg>
+        <span class="brand-name">NORTHSTAR<span class="brand-dot">.</span>BANK</span>
+      </a>
+
+      <div class="auth-pitch">
+        <p class="eyebrow">Online banking</p>
+        <h1>Your money,<br>clearly in view.</h1>
+        <p class="auth-lede">
+          Track balances, review transactions and manage your accounts from one
+          secure place — wherever the day takes you.
+        </p>
+
+        <ul class="auth-points">
+          <li>
+            <span class="tick" aria-hidden="true"></span>
+            <span>Real-time balances and pending activity</span>
+          </li>
+          <li>
+            <span class="tick" aria-hidden="true"></span>
+            <span>Statements and transaction history, on demand</span>
+          </li>
+          <li>
+            <span class="tick" aria-hidden="true"></span>
+            <span>Bank-grade encryption in transit and at rest</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="auth-legal">Northstar Bank, N.A. · Member FDIC · Equal Housing Lender</p>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-card">
+        <header class="auth-card-head">
+          <p class="eyebrow eyebrow-muted">Customer portal</p>
+          <h2>Sign in to online banking</h2>
+          <p class="muted">Enter the credentials provided with your account.</p>
+        </header>
+
+        <div class="alert alert-error" id="login-error" role="alert" hidden></div>
+
+        <form class="form" method="post" action="/login" autocomplete="on" novalidate>
+          <label class="field">
+            <span class="field-label">Username</span>
+            <input class="input" type="text" name="username" id="username" autocomplete="username"
+                   autocapitalize="none" spellcheck="false" required>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Password</span>
+            <span class="input-wrap">
+              <input class="input" type="password" name="password" id="password"
+                     autocomplete="current-password" required>
+              <button class="reveal" type="button" id="toggle-password" aria-label="Show password">Show</button>
+            </span>
+          </label>
+
+          <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+
+        <p class="auth-note">
+          Never share your password. Northstar Bank will never ask for it by email
+          or phone.
+        </p>
+
+        <p class="auth-support">Need help? Call <span class="nowrap">1-800-555-0110</span></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/app.js" defer></script>
+</body>
+</html>

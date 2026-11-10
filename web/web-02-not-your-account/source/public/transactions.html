@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transactions — Northstar Bank</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="app-page" data-page="transactions">
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="brand brand-light" href="/dashboard">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 1.6 19.5 12 30 15.5 19.5 19 16 29.4 12.5 19 2 15.5 12.5 12Z" fill="currentColor"/>
+        <circle cx="16" cy="15.6" r="2.5" fill="#0a1f3c"/>
+      </svg>
+      <span class="brand-name">NORTHSTAR<span class="brand-dot">.</span>BANK</span>
+    </a>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="app-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="app-nav" id="app-nav" aria-label="Primary">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/account">Account details</a>
+      <a href="/transactions" class="active" aria-current="page">Transactions</a>
+    </nav>
+
+    <div class="app-user">
+      <span class="user-chip"><span class="user-dot" aria-hidden="true"></span><span id="nav-user-name">Customer</span></span>
+      <form method="post" action="/logout">
+        <button class="btn btn-ghost btn-small" type="submit">Sign out</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="page-head">
+    <p class="eyebrow eyebrow-muted">Activity</p>
+    <h1>Transactions</h1>
+    <p class="muted">Posted transactions for account <span id="transactions-account">—</span>.</p>
+  </div>
+
+  <div class="alert alert-error" id="page-error" role="alert" hidden></div>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Transaction history</h2>
+      <span class="muted small" id="transactions-count"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th scope="col" class="align-right">Amount</th>
+            <th scope="col" class="align-right">Balance</th>
+          </tr>
+        </thead>
+        <tbody id="transactions-body">
+          <tr class="empty-row"><td colspan="5">Loading transactions…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="page-actions">
+    <a class="btn btn-secondary" href="/dashboard">Back to dashboard</a>
+    <a class="btn btn-primary" href="/account">Account details</a>
+  </div>
+</main>
+
+<footer class="app-footer">
+  <span>© 2026 Northstar Bank, N.A. · Member FDIC</span>
+  <span class="footer-links">Deposits are FDIC insured up to $250,000 per depositor.</span>
+</footer>
+
+<script src="/js/app.js" defer></script>
+</body>
+</html>

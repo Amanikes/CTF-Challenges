@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account details — Northstar Bank</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="app-page" data-page="account">
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="brand brand-light" href="/dashboard">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 1.6 19.5 12 30 15.5 19.5 19 16 29.4 12.5 19 2 15.5 12.5 12Z" fill="currentColor"/>
+        <circle cx="16" cy="15.6" r="2.5" fill="#0a1f3c"/>
+      </svg>
+      <span class="brand-name">NORTHSTAR<span class="brand-dot">.</span>BANK</span>
+    </a>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="app-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="app-nav" id="app-nav" aria-label="Primary">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/account" class="active" aria-current="page">Account details</a>
+      <a href="/transactions">Transactions</a>
+    </nav>
+
+    <div class="app-user">
+      <span class="user-chip"><span class="user-dot" aria-hidden="true"></span><span id="nav-user-name">Customer</span></span>
+      <form method="post" action="/logout">
+        <button class="btn btn-ghost btn-small" type="submit">Sign out</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="page-head">
+    <p class="eyebrow eyebrow-muted">Account</p>
+    <h1>Account details</h1>
+    <p class="muted">Information held for your account with Northstar Bank.</p>
+  </div>
+
+  <div class="alert alert-error" id="page-error" role="alert" hidden></div>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Account information</h2>
+      <span class="status-pill status-pill-light" id="account-status">—</span>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-group">
+        <h3>Account holder</h3>
+        <dl class="detail-list">
+          <div><dt>Name</dt><dd id="detail-name">—</dd></div>
+          <div><dt>Email</dt><dd id="detail-email">—</dd></div>
+          <div><dt>Phone</dt><dd id="detail-phone">—</dd></div>
+          <div><dt>Address</dt><dd id="detail-address">—</dd></div>
+          <div><dt>Customer since</dt><dd id="detail-customer-since">—</dd></div>
+        </dl>
+      </div>
+
+      <div class="detail-group">
+        <h3>Account</h3>
+        <dl class="detail-list">
+          <div><dt>Account number</dt><dd id="detail-account-number">—</dd></div>
+          <div><dt>Type</dt><dd id="detail-type">—</dd></div>
+          <div><dt>IBAN</dt><dd id="detail-iban">—</dd></div>
+          <div><dt>Branch</dt><dd id="detail-branch">—</dd></div>
+          <div><dt>Opened</dt><dd id="detail-opened">—</dd></div>
+          <div><dt>Currency</dt><dd id="detail-currency">—</dd></div>
+        </dl>
+      </div>
+
+      <div class="detail-group">
+        <h3>Balance</h3>
+        <dl class="detail-list">
+          <div><dt>Current balance</dt><dd id="detail-balance">—</dd></div>
+          <div><dt>Available balance</dt><dd id="detail-available">—</dd></div>
+          <div><dt>Card</dt><dd id="detail-card">—</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-actions">
+    <a class="btn btn-secondary" href="/dashboard">Back to dashboard</a>
+    <a class="btn btn-primary" href="/transactions">View transactions</a>
+  </div>
+</main>
+
+<footer class="app-footer">
+  <span>© 2026 Northstar Bank, N.A. · Member FDIC</span>
+  <span class="footer-links">Deposits are FDIC insured up to $250,000 per depositor.</span>
+</footer>
+
+<script src="/js/app.js" defer></script>
+</body>
+</html>

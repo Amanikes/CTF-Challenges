@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — Northstar Bank</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="app-page" data-page="dashboard">
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="brand brand-light" href="/dashboard">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 1.6 19.5 12 30 15.5 19.5 19 16 29.4 12.5 19 2 15.5 12.5 12Z" fill="currentColor"/>
+        <circle cx="16" cy="15.6" r="2.5" fill="#0a1f3c"/>
+      </svg>
+      <span class="brand-name">NORTHSTAR<span class="brand-dot">.</span>BANK</span>
+    </a>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="app-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="app-nav" id="app-nav" aria-label="Primary">
+      <a href="/dashboard" class="active" aria-current="page">Dashboard</a>
+      <a href="/account">Account details</a>
+      <a href="/transactions">Transactions</a>
+    </nav>
+
+    <div class="app-user">
+      <span class="user-chip"><span class="user-dot" aria-hidden="true"></span><span id="nav-user-name">Customer</span></span>
+      <form method="post" action="/logout">
+        <button class="btn btn-ghost btn-small" type="submit">Sign out</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="page-head">
+    <p class="eyebrow eyebrow-muted">Overview</p>
+    <h1>Welcome back, <span id="welcome-name">customer</span>.</h1>
+    <p class="muted" id="dashboard-subtitle">Here is a snapshot of your account.</p>
+  </div>
+
+  <div class="alert alert-error" id="page-error" role="alert" hidden></div>
+
+  <div class="dashboard-grid">
+    <section class="balance-card" aria-label="Account summary">
+      <div class="balance-top">
+        <span class="balance-label" id="account-type">Account</span>
+        <span class="status-pill" id="account-status">—</span>
+      </div>
+
+      <p class="balance-caption">Current balance</p>
+      <p class="balance-amount" id="account-balance">—</p>
+
+      <dl class="balance-meta">
+        <div>
+          <dt>Account number</dt>
+          <dd id="account-number">—</dd>
+        </div>
+        <div>
+          <dt>Available</dt>
+          <dd id="account-available">—</dd>
+        </div>
+      </dl>
+
+      <a class="balance-link" href="/transactions">View all transactions <span aria-hidden="true">→</span></a>
+    </section>
+
+    <div class="quick-grid">
+      <a class="quick-card" href="/account">
+        <span class="quick-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+        </span>
+        <span class="quick-title">Account details</span>
+        <span class="quick-desc">Holder information, IBAN and branch.</span>
+      </a>
+
+      <a class="quick-card" href="/transactions">
+        <span class="quick-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 7h13l-3-3M20 17H7l3 3"/><path d="M4 7v4M20 17v-4"/></svg>
+        </span>
+        <span class="quick-title">Transactions</span>
+        <span class="quick-desc">Every payment and deposit on this account.</span>
+      </a>
+    </div>
+  </div>
+
+  <section class="panel" aria-labelledby="recent-title">
+    <div class="panel-head">
+      <h2 id="recent-title">Recent transactions</h2>
+      <a class="text-link" href="/transactions">View all</a>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Date</th><th scope="col">Description</th><th scope="col" class="align-right">Amount</th></tr>
+        </thead>
+        <tbody id="recent-transactions">
+          <tr class="empty-row"><td colspan="3">Loading transactions…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="app-footer">
+  <span>© 2026 Northstar Bank, N.A. · Member FDIC</span>
+  <span class="footer-links">Deposits are FDIC insured up to $250,000 per depositor.</span>
+</footer>
+
+<script src="/js/app.js" defer></script>
+</body>
+</html>
