@@ -1,0 +1,72 @@
+# WEB-03 — Hidden in Plain Sight
+#
+# Verified against GZ::CTF 1.9.1 (commit 23ccbbaa), the same version used for
+# WEB-01 and WEB-02.
+#
+# GZ::CTF does not import challenge YAML: DynamicContainer challenges are created
+# through the admin UI or /api/Edit/Games/... . This file is the authoritative
+# value set for that configuration; every key under `gzctf` maps to a verified
+# GZ::CTF model property. See organizer/DEPLOYMENT.md for the exact request
+# bodies. This file contains no flag.
+
+id: WEB-03
+name: Hidden in Plain Sight
+author: AxumSec
+category: Web
+type: DynamicContainer
+difficulty: Easy
+points: 50
+flag_format: "AXUM{...}"
+authentication: none
+
+public:
+  description: |
+    Meridian Technologies recently deployed a new project-management portal.
+
+    The development team has been working on several features that are not yet
+    available to regular users. Following the latest deployment, some
+    application resources may have been exposed unintentionally.
+
+    Your task is to investigate the portal and uncover information that was
+    never intended to be publicly accessible.
+
+    **Objective:** Find the exposed internal project information and retrieve
+    the flag.
+
+    ### Hint
+
+    Sometimes the browser receives more information than the interface actually
+    displays.
+
+    Take a closer look at the resources loaded by the application.
+
+    Submit the flag you discover.
+
+  hints: []
+
+gzctf:
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeCategory.Web
+  category: Web
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double).
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 50
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token
+  # (verified placeholder syntax for GZ::CTF 1.9.1).
+  flagTemplate: "AXUM{hidden_in_plain_sight_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/web-03-hidden-in-plain-sight:1.0.0"
+  # Internal application port; GZ::CTF maps it to a random host port.
+  exposePort: 3000
+  memoryLimit: 128
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+  hints: []
