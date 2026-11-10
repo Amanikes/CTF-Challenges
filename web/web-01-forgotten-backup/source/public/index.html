@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northstar Systems — Enterprise Infrastructure Platform</title>
+<meta name="description" content="Northstar Systems builds resilient edge infrastructure, observability and zero-trust access for global engineering teams.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header" id="top">
+  <div class="wrap nav-wrap">
+    <a class="brand" href="/" aria-label="Northstar Systems home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 1.5 19.6 12 30 15.6 19.6 19.2 16 30 12.4 19.2 2 15.6 12.4 12Z" fill="currentColor"/>
+        <circle cx="16" cy="15.75" r="2.6" fill="#060b16"/>
+      </svg>
+      <span class="brand-name">NORTHSTAR<span class="brand-dot">.</span></span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+      <span></span><span></span><span></span>
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a href="#platform">Platform</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-cta" href="#contact">Client portal</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Enterprise infrastructure · Since 2011</p>
+        <h1>Infrastructure that<br><span class="accent">never stops thinking.</span></h1>
+        <p class="lede">
+          Northstar Systems runs the invisible layer behind the products you rely on —
+          global edge routing, real-time observability and zero-trust access, engineered
+          for teams that cannot afford downtime.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#platform">Explore the platform</a>
+          <a class="btn btn-ghost" href="#about">Why Northstar</a>
+        </div>
+        <dl class="hero-stats">
+          <div><dt>99.995%</dt><dd>SLA-backed uptime</dd></div>
+          <div><dt>42</dt><dd>Edge regions</dd></div>
+          <div><dt>8&nbsp;ms</dt><dd>Median response</dd></div>
+        </dl>
+      </div>
+
+      <aside class="hero-panel" aria-label="Network status">
+        <div class="panel-head">
+          <span class="dot-live" aria-hidden="true"></span>
+          <span>Global network status</span>
+          <span class="panel-badge">Operational</span>
+        </div>
+        <ul class="region-list">
+          <li><span>Frankfurt</span><span class="bar"><i style="--v: 96%"></i></span><span>96</span></li>
+          <li><span>Virginia</span><span class="bar"><i style="--v: 92%"></i></span><span>92</span></li>
+          <li><span>Singapore</span><span class="bar"><i style="--v: 88%"></i></span><span>88</span></li>
+          <li><span>São Paulo</span><span class="bar"><i style="--v: 81%"></i></span><span>81</span></li>
+          <li><span>Tokyo</span><span class="bar"><i style="--v: 94%"></i></span><span>94</span></li>
+        </ul>
+        <p class="panel-foot">Live capacity utilisation across primary regions.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="platform">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Platform</p>
+        <h2>One control plane for the whole estate.</h2>
+        <p class="section-sub">
+          Replace a dozen disconnected tools with a single, auditable layer that sits
+          between your applications and the public internet.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14 0 18M12 3c-3 3.5-3 14 0 18"/></svg>
+          </div>
+          <h3>Global edge routing</h3>
+          <p>Anycast delivery across 42 regions with automatic failover in under 200&nbsp;ms. Traffic is steered by health, cost and latency — not by guesswork.</p>
+          <ul class="card-list">
+            <li>Smart DNS and BGP steering</li>
+            <li>Per-route circuit breakers</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 5-7 4 5"/><path d="M3 21h18"/></svg>
+          </div>
+          <h3>Observability by default</h3>
+          <p>Traces, metrics and structured logs are collected at the edge and correlated automatically, so incidents are explained before they are escalated.</p>
+          <ul class="card-list">
+            <li>Trace-to-log correlation</li>
+            <li>Service-level objectives</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          </div>
+          <h3>Zero-trust access</h3>
+          <p>Every request is authenticated, authorised and recorded. Short-lived credentials replace long-lived secrets across the entire fleet.</p>
+          <ul class="card-list">
+            <li>Device-bound identities</li>
+            <li>Signed audit trail</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="solutions">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Solutions</p>
+        <h2>Built for teams under real load.</h2>
+        <p class="section-sub">
+          From a first production deployment to a multi-region migration, Northstar
+          meets engineering organisations where they are — and stays out of the way.
+        </p>
+        <div class="solution-rows">
+          <div class="solution-row">
+            <span class="solution-index">01</span>
+            <div>
+              <h3>Migration without downtime</h3>
+              <p>Dual-stack cutovers, shadow traffic and instant rollback keep releases boring.</p>
+            </div>
+          </div>
+          <div class="solution-row">
+            <span class="solution-index">02</span>
+            <div>
+              <h3>Compliance-ready audit</h3>
+              <p>Immutable records for SOC&nbsp;2 and ISO&nbsp;27001 evidence, exported on demand.</p>
+            </div>
+          </div>
+          <div class="solution-row">
+            <span class="solution-index">03</span>
+            <div>
+              <h3>Predictable economics</h3>
+              <p>Flat egress pricing and capacity reservations that scale down with your traffic.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-card">
+        <blockquote>
+          “We moved 1.8 billion monthly requests to Northstar over a single weekend.
+          The only thing our customers noticed was that response times dropped.”
+        </blockquote>
+        <div class="quote-meta">
+          <span class="avatar" aria-hidden="true">RK</span>
+          <div>
+            <strong>Rina Kessler</strong>
+            <span>VP Platform Engineering, Halcyon Retail</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap split about-split">
+      <div>
+        <p class="eyebrow">About Northstar</p>
+        <h2>Quietly critical infrastructure.</h2>
+        <p class="section-sub">
+          Northstar Systems was founded in 2011 by a small group of network engineers who
+          were tired of watching good products fail for operational reasons. Today we run
+          infrastructure for logistics, healthcare and financial platforms across four
+          continents — with a team of 180 people and a habit of writing things down.
+        </p>
+        <div class="about-stats">
+          <div><strong>180</strong><span>Engineers and operators</span></div>
+          <div><strong>2011</strong><span>Founded in Rotterdam</span></div>
+          <div><strong>14</strong><span>Years of continuous operation</span></div>
+        </div>
+      </div>
+
+      <div class="about-note">
+        <h3>Platform migration notice</h3>
+        <p>
+          The October&nbsp;2025 migration of our public web platform was completed on
+          schedule. All customer-facing services now run on the current release of the
+          Northstar control plane.
+        </p>
+        <p class="muted">
+          Historical deployment artefacts are retained by the operations team in
+          accordance with our internal retention policy.
+        </p>
+        <a class="text-link" href="#contact">Talk to the operations team →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta" id="contact">
+    <div class="wrap cta-inner">
+      <div>
+        <h2>Ready to see the whole picture?</h2>
+        <p>Talk to an infrastructure engineer — not a sales development representative.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="mailto:platform@northstar-systems.example">Book a technical review</a>
+        <a class="btn btn-ghost" href="#top">Back to top</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="/" aria-label="Northstar Systems home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 1.5 19.6 12 30 15.6 19.6 19.2 16 30 12.4 19.2 2 15.6 12.4 12Z" fill="currentColor"/>
+          <circle cx="16" cy="15.75" r="2.6" fill="#060b16"/>
+        </svg>
+        <span class="brand-name">NORTHSTAR<span class="brand-dot">.</span></span>
+      </a>
+      <p>Resilient infrastructure for teams that cannot afford to be offline.</p>
+      <p class="footer-legal">Northstar Systems B.V. · Rotterdam, Netherlands</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#platform">Edge routing</a></li>
+        <li><a href="#platform">Observability</a></li>
+        <li><a href="#platform">Zero trust</a></li>
+        <li><a href="#solutions">Pricing</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#solutions">Customers</a></li>
+        <li><a href="#contact">Careers</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#contact">Privacy</a></li>
+        <li><a href="#contact">Terms</a></li>
+        <li><a href="#contact">Security</a></li>
+        <li><a href="#contact">Status</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <span>© 2025 Northstar Systems B.V. All rights reserved.</span>
+    <span class="footer-links"><a href="#contact">Responsible disclosure</a> · <a href="#contact">Accessibility</a></span>
+  </div>
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>

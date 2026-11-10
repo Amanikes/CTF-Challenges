@@ -1,0 +1,64 @@
+# WEB-01 — The Forgotten Backup
+#
+# GZ::CTF does not import challenge YAML files: DynamicContainer challenges are
+# created through the administration UI or the `/api/Edit/Games/...` endpoints.
+# This file is the authoritative value set for that configuration. Every key
+# under `gzctf` maps to a verified GZ::CTF model property (v1.9.1); the exact
+# request bodies are in docs/DEPLOYMENT.md.
+#
+# Do not treat this file as an importable package. It contains no flag.
+
+id: WEB-01
+name: The Forgotten Backup
+category: Web
+type: DynamicContainer
+difficulty: Easy
+points: 50
+flag_format: "AXUM{...}"
+
+public:
+  description: |
+    ### Story
+
+    Northstar Systems recently launched its new corporate website.
+
+    Everything appears to be working perfectly, but something from the previous
+    deployment may have been left behind.
+
+    The development team claims the migration was completed successfully.
+
+    Are you sure?
+
+    ### Objective
+
+    Investigate the website and recover the hidden flag.
+
+gzctf:
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeCategory.Web
+  category: Web
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double), not the
+  # display difficulty. 1.0 keeps the score flat.
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 50
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token.
+  flagTemplate: "AXUM{forgotten_backup_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/web-01-forgotten-backup:1.0.0"
+  # Port the process listens on; GZ::CTF maps it to a random host port.
+  exposePort: 3000
+  # ContainerConfig.MemoryLimit / CPUCount / StorageLimit
+  memoryLimit: 128
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+
+  # Optional late hint, release manually if teams are stuck.
+  hints: []

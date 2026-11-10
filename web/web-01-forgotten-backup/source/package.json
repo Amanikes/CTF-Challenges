@@ -1,0 +1,19 @@
+{
+  "name": "northstar-web",
+  "version": "1.4.2",
+  "private": true,
+  "description": "Northstar Systems public web platform",
+  "type": "commonjs",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "backup": "node src/generate-backup.js"
+  },
+  "dependencies": {
+    "express": "5.3.0",
+    "yazl": "3.3.1"
+  }
+}

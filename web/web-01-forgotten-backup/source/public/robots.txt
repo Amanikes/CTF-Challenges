@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Internal areas excluded from indexing
+Disallow: /backups/
+Disallow: /admin/
