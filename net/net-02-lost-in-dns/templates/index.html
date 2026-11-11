@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lost in DNS — Packet Capture</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <path d="M3.5 12h17M12 3.5c2.6 2.4 4 5.4 4 8.5s-1.4 6.1-4 8.5c-2.6-2.4-4-5.4-4-8.5s1.4-6.1 4-8.5z"
+                  fill="none" stroke="currentColor" stroke-width="1.4" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>Network Monitoring</strong>
+          <small>Incident workspace</small>
+        </span>
+      </div>
+      <nav class="topnav" aria-label="Secondary">
+        <span>Case DNS-114 · investigative hold</span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Capture archive · analyst access</p>
+        <h1>Lost in DNS</h1>
+        <p class="lede">
+          A network monitoring system has detected unusual DNS activity originating from an
+          internal workstation. An investigation team captured the network traffic, but the DNS
+          queries appear mostly ordinary at first glance.
+        </p>
+        <p class="lede">
+          Something unusual is hidden within the DNS records. Investigate the provided packet
+          capture, identify the suspicious DNS queries, reconstruct the hidden message, and
+          recover the flag.
+        </p>
+
+        <div class="availability">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Capture available · {{CAPTURE_SIZE}}</span>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Artifact</h2>
+          <dl class="facts">
+            <div><dt>File</dt><dd class="mono">{{CAPTURE_NAME}}</dd></div>
+            <div><dt>Format</dt><dd>PCAP (libpcap)</dd></div>
+            <div><dt>Size</dt><dd data-bytes="{{CAPTURE_BYTES}}">{{CAPTURE_SIZE}}</dd></div>
+            <div><dt>Scope</dt><dd>Internal DNS resolvers</dd></div>
+          </dl>
+          <a class="download" href="/download" download="{{CAPTURE_NAME}}">Download capture</a>
+          <p class="fineprint">
+            Each workspace receives a capture generated for its own investigation. Re-downloading
+            replaces your previous copy.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Mission</h2>
+          <ol class="steps">
+            <li><span class="step-label">Download the PCAP</span></li>
+            <li><span class="step-label">Inspect DNS traffic</span></li>
+            <li><span class="step-label">Identify suspicious query patterns</span></li>
+            <li><span class="step-label">Extract hexadecimal fragments</span></li>
+            <li><span class="step-label">Reconstruct and decode the message</span></li>
+            <li><span class="step-label">Submit the flag</span></li>
+          </ol>
+        </section>
+      </div>
+
+      <section class="notice">
+        <h2>Tools</h2>
+        <p>
+          Wireshark, tshark or any other packet-analysis tool will do. Start with the protocol
+          hierarchy, then narrow down to the queries that interest you.
+        </p>
+        <p class="mono-small">
+          wireshark {{CAPTURE_NAME}} &nbsp;·&nbsp; tcpdump -nn -r {{CAPTURE_NAME}}
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Network Monitoring · Incident workspace</span>
+      <span>Internal distribution</span>
+    </footer>
+  </body>
+</html>

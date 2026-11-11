@@ -1,0 +1,13 @@
+node_modules
+.git
+.gitignore
+tests
+docs
+runtime
+*.pcap
+*.md
+.env
+.env.*
+__pycache__
+*.pyc
+docker-compose.yml

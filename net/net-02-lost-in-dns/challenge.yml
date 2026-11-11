@@ -1,0 +1,117 @@
+# NET-02 — Lost in DNS
+#
+# Verified against GZ::CTF 1.9.1 (commit 23ccbbaa), the same version used for
+# WEB-01..WEB-05, REV-01..REV-02 and NET-01.
+#
+# CATEGORY NOTE: GZ::CTF 1.9.1 has no "Network" category. The verified
+# ChallengeCategory enum is:
+#   Misc, Crypto, Pwn, Web, Reverse, Blockchain, Forensics, Hardware, Mobile,
+#   PPC, AI, Pentest, OSINT        (src/GZCTF/Utils/Enums.cs)
+# This challenge is therefore configured as `Forensics`, matching NET-01 and
+# remaining inside verified values.
+#
+# GZ::CTF does not import challenge YAML: DynamicContainer challenges are created
+# through the admin UI or /api/Edit/Games/... . This file is the authoritative
+# value set for that configuration. Every key under `gzctf` maps to a verified
+# 1.9.1 model property:
+#   ChallengeCategory.Forensics      -> Utils/Enums.cs
+#   ChallengeType.DynamicContainer   -> Utils/Enums.cs
+#   ContainerConfig.Image/ExposedPort/MemoryLimit/CPUCount/StorageLimit/NetworkMode
+#                                    -> Models/Internal/ContainerConfig.cs
+#   Challenge.Hints (List<string>)   -> Models/Data/Challenge.cs
+# This file contains no flag.
+
+id: NET-02
+name: Lost in DNS
+author: AxumSec
+category: Forensics
+platform_category_note: "GZ::CTF 1.9.1 has no Network category; Forensics is used"
+type: DynamicContainer
+difficulty: Easy
+points: 50
+flag_format: "AXUM{...}"
+authentication: none
+
+public:
+  description: |
+    A network monitoring system has detected unusual DNS activity originating
+    from an internal workstation.
+
+    An investigation team captured the network traffic, but the DNS queries
+    appear mostly ordinary at first glance. Something unusual is hidden within
+    the DNS records.
+
+    Investigate the provided packet capture, identify the suspicious DNS
+    queries, reconstruct the hidden message, and recover the flag.
+
+  hints:
+    - |
+      **Hint 1**
+
+      DNS traffic can reveal more than just the domains a machine visits.
+      Inspect the query names carefully.
+    - |
+      **Hint 2**
+
+      Wireshark provides a display filter that isolates DNS packets.
+    - |
+      **Hint 3**
+
+      Look for repeated destination domains and subdomains containing
+      sequential numeric identifiers.
+    - |
+      **Hint 4**
+
+      The data fragments are hexadecimal. Concatenate them in the correct order
+      before decoding.
+
+gzctf:
+  # ChallengeCategory.Forensics (no Network category exists in 1.9.1)
+  category: Forensics
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double), not the
+  # display difficulty. 1.0 keeps the score flat.
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 50
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token
+  # (verified placeholder syntax for GZ::CTF 1.9.1).
+  flagTemplate: "AXUM{lost_in_dns_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/net-02-lost-in-dns:1.0.0"
+  # The application listens on 8080 by default (PORT); GZ::CTF maps this port to
+  # a random host port per instance.
+  exposePort: 8080
+  # ContainerConfig.MemoryLimit / CPUCount / StorageLimit
+  memoryLimit: 128
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+
+  # Hints are plain markdown strings (Challenge.Hints is List<string>).
+  hints:
+    - |
+      **Hint 1**
+
+      DNS traffic can reveal more than just the domains a machine visits.
+      Inspect the query names carefully.
+    - |
+      **Hint 2**
+
+      Wireshark provides a display filter that isolates DNS packets.
+    - |
+      **Hint 3**
+
+      Look for repeated destination domains and subdomains containing
+      sequential numeric identifiers.
+    - |
+      **Hint 4**
+
+      The data fragments are hexadecimal. Concatenate them in the correct order
+      before decoding.
