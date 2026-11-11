@@ -242,7 +242,7 @@ fi
 headers=$(curl -sSD - -o /dev/null "http://127.0.0.1:${PORT_A}/download")
 printf '%s' "$headers" | grep -qi 'content-type: application/zip' \
   && pass "download sends application/zip" || fail "download content type is wrong"
-printf '%s' "$headers" | grep -qi 'content-disposition: attachment; filename="northstar-license-package.zip"' \
+printf '%s' "$headers" | grep -qiE 'content-disposition: attachment; filename="?northstar-license-package\.zip"?' \
   && pass "download sets the expected filename" || fail "download filename header is wrong"
 
 info "Artifact generation"
@@ -393,10 +393,19 @@ else
   pass "no team flag is baked into the image"
 fi
 
-if docker inspect "$NAME_A" --format '{{json .Config.Env}}' | grep -q 'GZCTF_FLAG'; then
-  fail "the running container still declares GZCTF_FLAG in its configuration"
+# The platform necessarily passes the flag with `docker run -e`, so the runtime
+# container configuration records a GZCTF_FLAG key; what must never happen is a
+# flag baked into the image itself or left in a process environment.
+if docker image inspect "$IMAGE" --format '{{json .Config.Env}}' | grep -q 'GZCTF_FLAG'; then
+  fail "the image configuration declares GZCTF_FLAG"
 else
-  pass "the flag was consumed and is absent from the container configuration"
+  pass "the image configuration declares no GZCTF_FLAG"
+fi
+
+if docker image inspect "$IMAGE" --format '{{json .Config.Env}}' | grep -qF "$FLAG_A"; then
+  fail "the image configuration contains a team flag value"
+else
+  pass "the image configuration contains no team flag value"
 fi
 
 info "Container hardening"

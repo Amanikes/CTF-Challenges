@@ -1,0 +1,97 @@
+# REV-01 — The Broken License
+#
+# Verified against GZ::CTF 1.9.1 (commit 23ccbbaa), the same version used for
+# WEB-01 through WEB-05.
+#
+# GZ::CTF does not import challenge YAML: DynamicContainer challenges are created
+# through the admin UI or /api/Edit/Games/... . This file is the authoritative
+# value set for that configuration; every key under `gzctf` maps to a verified
+# GZ::CTF model property (ChallengeCategory.Reverse = 4, ChallengeType.
+# DynamicContainer, ContainerConfig.Image/ExposedPort, Challenge.Hints as
+# List<string>). See organizer/DEPLOYMENT.md for the exact request bodies.
+# This file contains no flag.
+
+id: REV-01
+name: The Broken License
+author: AxumSec
+category: Reverse
+type: DynamicContainer
+difficulty: Easy
+points: 100
+flag_format: "AXUM{...}"
+authentication: none
+
+public:
+  description: |
+    Northstar Systems recovered an old Linux license utility, but the original
+    developer and license documentation are gone.
+
+    You have the executable and its associated data file.
+
+    Investigate how the application validates a license and recover the
+    original accepted key.
+
+  hints:
+    - |
+      **Hint 1 — Identify the file**
+
+      Before running the program, inspect what kind of executable you have and
+      examine the information it exposes.
+    - |
+      **Hint 2 — Follow the validation**
+
+      Look for the function that checks the entered license. Pay attention to
+      how each input byte is transformed before comparison.
+    - |
+      **Hint 3 — XOR is reversible**
+
+      The executable contains the transformation key, while the accompanying
+      data file contains the encoded license. Remember that XOR can be reversed
+      by applying the same key again.
+
+gzctf:
+  # ChallengeCategory.Reverse
+  category: Reverse
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double), not the
+  # display difficulty. 1.0 keeps the score flat.
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 100
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token
+  # (verified placeholder syntax for GZ::CTF 1.9.1).
+  flagTemplate: "AXUM{broken_license_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/rev-01-broken-license:1.0.0"
+  # Port the download service listens on; GZ::CTF maps it to a random host port.
+  exposePort: 3000
+  # ContainerConfig.MemoryLimit / CPUCount / StorageLimit
+  memoryLimit: 128
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+
+  # Hints are plain markdown strings (Challenge.Hints is List<string>).
+  hints:
+    - |
+      **Hint 1 — Identify the file**
+
+      Before running the program, inspect what kind of executable you have and
+      examine the information it exposes.
+    - |
+      **Hint 2 — Follow the validation**
+
+      Look for the function that checks the entered license. Pay attention to
+      how each input byte is transformed before comparison.
+    - |
+      **Hint 3 — XOR is reversible**
+
+      The executable contains the transformation key, while the accompanying
+      data file contains the encoded license. Remember that XOR can be reversed
+      by applying the same key again.

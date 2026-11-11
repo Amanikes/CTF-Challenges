@@ -9,10 +9,12 @@ COPY src ./src
 # Straightforward disassembly is intentional: -O1 with no inlining keeps
 # validate_license as a real symbol, symbols are not stripped, and the static
 # link makes the downloadable binary run on any Linux x86_64 host. Ordinary
-# hardening flags stay on.
-RUN gcc -std=c11 -O1 -fno-inline -fstack-protector-strong -D_FORTIFY_SOURCE=2 \
+# hardening flags stay on. objcopy only drops DWARF sections that the static
+# musl libc objects carry in; .symtab is kept so the binary stays analysable.
+RUN gcc -std=c11 -O1 -g0 -fno-inline -fstack-protector-strong -D_FORTIFY_SOURCE=2 \
         -Wall -Wextra -static \
         -o /build/northstar-license src/northstar-license.c \
+    && objcopy --strip-debug /build/northstar-license \
     && chmod 0755 /build/northstar-license
 
 FROM node:22-alpine AS deps
