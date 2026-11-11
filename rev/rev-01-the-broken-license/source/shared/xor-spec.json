@@ -1,0 +1,20 @@
+{
+  "algorithm": "repeating-key XOR",
+  "key": "NorthstarK3y",
+  "keyBytes": [78, 111, 114, 116, 104, 115, 116, 97, 114, 75, 51, 121],
+  "maxPlaintextBytes": 128,
+  "plaintextByteRange": [32, 126],
+  "formula": {
+    "encode": "C[i] = P[i] XOR K[i % n]",
+    "decode": "P[i] = C[i] XOR K[i % n]"
+  },
+  "testVector": {
+    "plaintext": "AXUM{spec_vector_01}",
+    "encodedHex": "0f372739130004041114451c2d1b1d063743451c"
+  },
+  "notes": [
+    "This file is the authoritative copy of the transformation used by the C validator, the runtime artifact generator and the organizer recovery script.",
+    "The C implementation repeats the same key bytes as a literal in source/src/northstar_xor.h.",
+    "tests/run-local-docker-tests.sh asserts that the compiled binary accepts data encoded with these bytes, so a mismatch fails the build."
+  ]
+}

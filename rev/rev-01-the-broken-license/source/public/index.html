@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Northstar License Manager — Download</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+            <path d="M12 8.2 16.2 10.6v4.8L12 17.8 7.8 15.4v-4.8z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" opacity=".65" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>Northstar Systems</strong>
+          <small>License Management</small>
+        </span>
+      </div>
+      <nav class="topnav" aria-label="Secondary">
+        <span class="nav-static">Product archive</span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Recovered release</p>
+        <h1>Northstar License Manager</h1>
+        <p class="lede">
+          An archived Linux utility recovered from a legacy Northstar Systems deployment. The
+          original license documentation is unavailable.
+        </p>
+
+        <div class="availability">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Version 2.4.1 · build archive available</span>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Package</h2>
+          <dl class="facts">
+            <div><dt>File</dt><dd class="mono">northstar-license-package.zip</dd></div>
+            <div><dt>Platform</dt><dd>Linux x86_64</dd></div>
+            <div><dt>Format</dt><dd>ELF64 executable and data file</dd></div>
+            <div><dt>Contents</dt><dd class="mono">northstar-license · license.dat · README.txt</dd></div>
+          </dl>
+          <a class="download" href="/download" download="northstar-license-package.zip">
+            Download package
+          </a>
+          <p class="fineprint">
+            Each review copy is generated for the requesting environment. Re-downloading replaces
+            your previous archive.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Running the utility</h2>
+          <ol class="steps">
+            <li>
+              <span class="step-label">Extract</span>
+              <code>unzip northstar-license-package.zip</code>
+            </li>
+            <li>
+              <span class="step-label">Enter the directory</span>
+              <code>cd northstar-license-package</code>
+            </li>
+            <li>
+              <span class="step-label">Make it executable</span>
+              <code>chmod +x northstar-license</code>
+            </li>
+            <li>
+              <span class="step-label">Run and enter a license key</span>
+              <code>./northstar-license</code>
+            </li>
+          </ol>
+          <p class="fineprint">
+            <code>license.dat</code> must stay in the same directory as the executable. The
+            utility reads it at start-up and reports a missing data file otherwise.
+          </p>
+        </section>
+      </div>
+
+      <section class="notice">
+        <h2>About this build</h2>
+        <p>
+          The license checking routine was written by a contractor who has since left the company.
+          Source code, build scripts and the original signing documentation were not retained.
+          Operations can confirm that a correctly licensed installation accepts its key, but the
+          accepted value itself is not recorded anywhere in this archive.
+        </p>
+        <p>
+          This archive is provided for internal review only. Do not redistribute.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Northstar Systems · License Management</span>
+      <span>Internal review distribution</span>
+    </footer>
+  </body>
+</html>

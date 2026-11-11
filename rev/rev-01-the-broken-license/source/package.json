@@ -1,0 +1,19 @@
+{
+  "name": "northstar-license-download",
+  "version": "2.4.1",
+  "private": true,
+  "description": "Northstar License Manager download service and runtime artifact generator",
+  "type": "commonjs",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "artifact": "node scripts/generate-artifact.js"
+  },
+  "dependencies": {
+    "express": "5.3.0",
+    "yazl": "3.3.1"
+  }
+}
