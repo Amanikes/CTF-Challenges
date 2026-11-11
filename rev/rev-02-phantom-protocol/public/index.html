@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Phantom Protocol — Analyst Package</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+            <path d="M8 13.2 11 16l5-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>Aegis Communications</strong>
+          <small>Secure Systems Group</small>
+        </span>
+      </div>
+      <nav class="topnav" aria-label="Secondary">
+        <span>Case PHTM-0417</span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Recovered binary · analyst handoff</p>
+        <h1>Phantom Protocol</h1>
+        <p class="lede">
+          A decommissioned license client from the Phantom Protocol pilot was recovered from an
+          intercept. Its companion data file survived, but the accepted access token is not
+          recorded anywhere.
+        </p>
+
+        <div class="availability">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Analyst package available</span>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Package</h2>
+          <dl class="facts">
+            <div><dt>File</dt><dd class="mono">phantom-protocol-package.zip</dd></div>
+            <div><dt>Platform</dt><dd>Linux x86_64</dd></div>
+            <div><dt>Format</dt><dd>ELF64 executable and data file</dd></div>
+            <div><dt>Contents</dt><dd class="mono">phantom-client · protocol.dat · README.txt</dd></div>
+          </dl>
+          <a class="download" href="/download" download="phantom-protocol-package.zip">
+            Download analyst package
+          </a>
+          <p class="fineprint">
+            Each package is generated for the requesting workstation. Re-downloading replaces your
+            previous archive.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Testing a candidate token</h2>
+          <ol class="steps">
+            <li>
+              <span class="step-label">Extract</span>
+              <code>unzip phantom-protocol-package.zip</code>
+            </li>
+            <li>
+              <span class="step-label">Enter the directory</span>
+              <code>cd phantom-protocol</code>
+            </li>
+            <li>
+              <span class="step-label">Make it executable</span>
+              <code>chmod +x phantom-client</code>
+            </li>
+            <li>
+              <span class="step-label">Check a candidate</span>
+              <code>./phantom-client --verify 'CANDIDATE'</code>
+            </li>
+          </ol>
+          <p class="fineprint">
+            The client loads <code>protocol.dat</code> from its own directory. Running it without
+            arguments prints the usage summary.
+          </p>
+        </section>
+      </div>
+
+      <section class="notice">
+        <h2>Analyst notes</h2>
+        <p>
+          The intercept contains the client and its data file only. No source, no build scripts and
+          no documentation were recovered. The client reports only whether a candidate is accepted;
+          it never discloses the stored token.
+        </p>
+        <p>
+          The transformation applied to protocol data is reversible by design. Treat the executable
+          and <code>protocol.dat</code> as a single artifact.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Aegis Communications · Secure Systems Group</span>
+      <span>Case PHTM-0417 · internal distribution</span>
+    </footer>
+  </body>
+</html>
