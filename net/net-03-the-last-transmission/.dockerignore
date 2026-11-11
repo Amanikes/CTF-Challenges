@@ -1,0 +1,13 @@
+.git
+.gitignore
+tests
+docs
+artifacts
+*.pcap
+*.zip
+*.md
+.env
+.env.*
+__pycache__
+*.pyc
+docker-compose.yml

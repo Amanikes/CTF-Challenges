@@ -1,0 +1,26 @@
+# Local development and testing only. GZ::CTF deploys this image as a
+# DynamicContainer and injects GZCTF_FLAG itself, so this file is not used in
+# production and does not conflict with the platform configuration.
+services:
+  net-03:
+    build: .
+    image: net-03-the-last-transmission:dev
+    environment:
+      GZCTF_FLAG: "GZCTF{LOCAL_COMPOSE_TEST_FLAG}"
+      PORT: "8080"
+      PCAP_PATH: /app/artifacts/capture.pcap
+      LOG_LEVEL: INFO
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    tmpfs:
+      - /app/artifacts:rw,noexec,nosuid,nodev,size=16m
+      - /tmp:rw,noexec,nosuid,nodev,size=4m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 128
+    mem_limit: 192m
+    cpus: 0.5
+    restart: "no"

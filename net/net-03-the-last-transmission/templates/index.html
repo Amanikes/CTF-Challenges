@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Last Transmission — Incident Capture</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M4 14.5a4.5 4.5 0 0 1 1.2-8.8 5.5 5.5 0 0 1 10.6-1 4 4 0 0 1 .7 7.9"
+                  fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M12 12v8m0 0-2.6-2.6M12 20l2.6-2.6" fill="none" stroke="currentColor"
+                  stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>Asterion Technologies</strong>
+          <small>Incident response workspace</small>
+        </span>
+      </div>
+      <nav class="topnav" aria-label="Secondary">
+        <span>Case AX-7842 · evidence hold</span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Network forensics · evidence archive</p>
+        <h1>The Last Transmission</h1>
+        <p class="lede">
+          Asterion Technologies has reported a suspected data breach. One of its internal
+          workstations communicated with an unfamiliar external server shortly before confidential
+          information disappeared from the organisation's systems.
+        </p>
+        <p class="lede">
+          The security team recovered a packet capture from the affected network segment. It
+          contains DNS lookups, HTTP requests and an unusual file transfer. Individually these
+          events look ordinary — together they may reveal what happened.
+        </p>
+
+        <div class="availability">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Evidence capture available · {{CAPTURE_SIZE}}</span>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Artifact</h2>
+          <dl class="facts">
+            <div><dt>File</dt><dd class="mono">{{CAPTURE_NAME}}</dd></div>
+            <div><dt>Format</dt><dd>PCAP (libpcap)</dd></div>
+            <div><dt>Size</dt><dd>{{CAPTURE_SIZE}}</dd></div>
+            <div><dt>Segment</dt><dd>Engineering VLAN 20</dd></div>
+          </dl>
+          <a class="download" href="/download" download="{{CAPTURE_NAME}}">Download capture</a>
+          <p class="fineprint">
+            Each workspace receives a capture generated for its own investigation. Re-downloading
+            replaces your previous copy.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Mission</h2>
+          <ol class="steps">
+            <li><span class="step-label">Investigate DNS</span></li>
+            <li><span class="step-label">Identify suspicious destinations</span></li>
+            <li><span class="step-label">Correlate HTTP communication</span></li>
+            <li><span class="step-label">Identify the file transfer session</span></li>
+            <li><span class="step-label">Reconstruct the TCP streams</span></li>
+            <li><span class="step-label">Extract the transferred archive</span></li>
+            <li><span class="step-label">Recover the flag</span></li>
+          </ol>
+        </section>
+      </div>
+
+      <section class="notice">
+        <h2>Recommended tools</h2>
+        <p>
+          Wireshark, tshark and standard archive utilities. The capture is self-contained: no live
+          systems are reachable from this workspace, and the addresses inside it are
+          documentation-only.
+        </p>
+        <p class="mono-small">
+          wireshark {{CAPTURE_NAME}} &nbsp;·&nbsp; tshark -r {{CAPTURE_NAME}} &nbsp;·&nbsp;
+          tcpdump -nn -r {{CAPTURE_NAME}}
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Asterion Technologies · Incident Response</span>
+      <span>Internal distribution</span>
+    </footer>
+  </body>
+</html>
