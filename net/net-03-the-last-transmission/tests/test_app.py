@@ -144,7 +144,16 @@ class AppTests(unittest.TestCase):
     def test_landing_page_hides_solution_details(self):
         _, _, body = self.get("/")
         text = body.decode()
-        for secret in (FLAG, "X-", "evidence", "incident_summary", "50000", "archive-access"):
+        for secret in (
+            FLAG,
+            "GZCTF{",
+            "AX-7842",
+            "incident_summary",
+            "confidential_bundle",
+            "50000",
+            "archive-access",
+            "files-update",
+        ):
             self.assertNotIn(secret, text)
 
     def test_missing_artifact_is_handled(self):
