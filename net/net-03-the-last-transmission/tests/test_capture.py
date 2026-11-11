@@ -91,7 +91,7 @@ class CaptureTests(unittest.TestCase):
             if not packet.haslayer(TCP):
                 continue
             key = (packet[IP].src, packet[TCP].sport, packet[IP].dst, packet[TCP].dport)
-            triples.setdefault(key, set()).add(packet[TCP].flags)
+            triples.setdefault(key, set()).add(str(packet[TCP].flags))
 
         payload_flows = {
             (packet[IP].src, packet[TCP].sport, packet[IP].dst, packet[TCP].dport)
