@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meridian Technologies — Integration Console</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M3 19V5l9 7 9-7v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <strong>Meridian</strong>
+            <small>Integration Console</small>
+          </span>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <a class="nav-item is-active" href="#overview">Overview</a>
+          <a class="nav-item" href="#integrations">Integrations</a>
+          <a class="nav-item" href="#preview">URL Preview</a>
+          <a class="nav-item" href="#status">System Status</a>
+        </nav>
+
+        <div class="sidebar-foot">
+          <span class="env-pill">production · eu-west-2</span>
+          <span class="build">build 5.2.0</span>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <h1>Integration Console</h1>
+            <p class="subtitle">Endpoint preview and connector health for Meridian internal platforms.</p>
+          </div>
+          <div class="topbar-meta">
+            <span class="chip" id="gateway-chip" data-state="pending">Gateway · checking</span>
+            <span class="chip chip-muted" id="clock">—</span>
+          </div>
+        </header>
+
+        <section id="overview" class="section">
+          <h2>Overview</h2>
+          <div class="metric-grid">
+            <article class="metric">
+              <span class="metric-label">Registered integrations</span>
+              <strong class="metric-value" id="metric-integrations">—</strong>
+              <span class="metric-note" id="metric-integrations-note">loading catalogue</span>
+            </article>
+            <article class="metric">
+              <span class="metric-label">Gateway uptime</span>
+              <strong class="metric-value" id="metric-uptime">—</strong>
+              <span class="metric-note">since container start</span>
+            </article>
+            <article class="metric">
+              <span class="metric-label">Preview timeout</span>
+              <strong class="metric-value" id="metric-timeout">—</strong>
+              <span class="metric-note">per outbound request</span>
+            </article>
+            <article class="metric">
+              <span class="metric-label">Response ceiling</span>
+              <strong class="metric-value" id="metric-limit">—</strong>
+              <span class="metric-note">truncated beyond this size</span>
+            </article>
+          </div>
+        </section>
+
+        <section id="integrations" class="section">
+          <div class="section-head">
+            <h2>Integrations</h2>
+            <span class="section-note">Connectors registered with the gateway</span>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Connector</th>
+                  <th scope="col">Kind</th>
+                  <th scope="col">Endpoint</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="integrations-body">
+                <tr class="placeholder-row">
+                  <td colspan="5">Loading connectors…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="preview" class="section">
+          <div class="section-head">
+            <h2>URL Preview</h2>
+            <span class="section-note">The gateway fetches the endpoint and returns its response</span>
+          </div>
+
+          <form class="preview-form" id="preview-form" autocomplete="off">
+            <label class="field">
+              <span class="field-label">Endpoint URL</span>
+              <input
+                type="text"
+                id="preview-url"
+                name="url"
+                placeholder="https://service.example.test/health"
+                spellcheck="false"
+              />
+            </label>
+            <button type="submit" class="button" id="preview-submit">Preview</button>
+          </form>
+
+          <p class="hint" id="preview-hint">
+            Requests are executed by the gateway service on the server side, not by this browser tab.
+          </p>
+
+          <div class="preview-grid">
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Response</h3>
+                <span class="badge" id="response-status">no request</span>
+              </div>
+              <dl class="kv" id="response-meta">
+                <div><dt>Target</dt><dd id="response-target">—</dd></div>
+                <div><dt>Duration</dt><dd id="response-duration">—</dd></div>
+                <div><dt>Body size</dt><dd id="response-size">—</dd></div>
+              </dl>
+              <h4 class="subhead">Response headers</h4>
+              <pre class="code code-short" id="response-headers">—</pre>
+              <h4 class="subhead">Response body</h4>
+              <pre class="code" id="response-body">Submit a URL to preview its response.</pre>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Recent preview requests</h3>
+                <button type="button" class="link-button" id="clear-history">Clear</button>
+              </div>
+              <ul class="history" id="history">
+                <li class="history-empty">No previews yet in this session.</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="alert" id="preview-alert" role="status" hidden></p>
+        </section>
+
+        <section id="status" class="section">
+          <div class="section-head">
+            <h2>System Status</h2>
+            <span class="section-note">Gateway self-report</span>
+          </div>
+          <div class="panel">
+            <dl class="kv kv-wide" id="status-list">
+              <div><dt>Service</dt><dd>—</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span>Meridian Technologies · Platform Engineering</span>
+          <span>Internal use only</span>
+        </footer>
+      </main>
+    </div>
+
+    <script src="/assets/app.js" defer></script>
+  </body>
+</html>

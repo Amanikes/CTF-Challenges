@@ -1,0 +1,103 @@
+# WEB-05 — The Internal Gateway
+#
+# Verified against GZ::CTF 1.9.1 (commit 23ccbbaa), the same version used for
+# WEB-01 through WEB-04.
+#
+# GZ::CTF does not import challenge YAML: DynamicContainer challenges are created
+# through the admin UI or /api/Edit/Games/... . This file is the authoritative
+# value set for that configuration; every key under `gzctf` maps to a verified
+# GZ::CTF model property. See organizer/DEPLOYMENT.md for the exact request
+# bodies. This file contains no flag.
+#
+# Deployment model: GZ::CTF 1.9.1 exposes exactly one `containerImage` and one
+# `exposePort` per dynamic challenge (see Models/Internal/ContainerConfig.cs),
+# so this challenge uses the single-container, two-process topology. See the
+# README for the verification evidence.
+
+id: WEB-05
+name: The Internal Gateway
+author: AxumSec
+category: Web
+type: DynamicContainer
+difficulty: Hard
+points: 300
+flag_format: "AXUM{...}"
+authentication: none
+
+public:
+  description: |
+    Meridian Technologies uses an integration console to preview remote
+    endpoints before connecting them to internal services.
+
+    The preview feature appears to work normally, but the gateway may have
+    access to more than its users can see.
+
+    Investigate how the preview requests are handled and determine what else
+    the gateway can reach.
+
+    **Objective:** retrieve the restricted diagnostics record and recover the
+    flag.
+
+  hints:
+    - |
+      **Hint 1 — The preview**
+
+      The preview feature does more than validate a URL. Pay attention to where
+      the request is actually performed.
+    - |
+      **Hint 2 — The network boundary**
+
+      A service that your browser cannot reach may still be reachable from the
+      server handling your request.
+    - |
+      **Hint 3 — The internal API**
+
+      Investigate the HTTP services accessible from the gateway. Look for
+      diagnostics-related routes and inspect their JSON responses.
+
+gzctf:
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeCategory.Web
+  category: Web
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double), not the
+  # display difficulty. 1.0 keeps the score flat.
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 300
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token
+  # (verified placeholder syntax for GZ::CTF 1.9.1).
+  flagTemplate: "AXUM{internal_gateway_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/web-05-internal-gateway:1.0.0"
+  # The gateway port. GZ::CTF maps it to a random host port; the internal
+  # diagnostics service on 127.0.0.1:9000 is never published.
+  exposePort: 3000
+  # ContainerConfig.MemoryLimit / CPUCount / StorageLimit
+  memoryLimit: 128
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+
+  # Hints are plain markdown strings (Challenge.Hints is List<string>).
+  hints:
+    - |
+      **Hint 1 — The preview**
+
+      The preview feature does more than validate a URL. Pay attention to where
+      the request is actually performed.
+    - |
+      **Hint 2 — The network boundary**
+
+      A service that your browser cannot reach may still be reachable from the
+      server handling your request.
+    - |
+      **Hint 3 — The internal API**
+
+      Investigate the HTTP services accessible from the gateway. Look for
+      diagnostics-related routes and inspect their JSON responses.
