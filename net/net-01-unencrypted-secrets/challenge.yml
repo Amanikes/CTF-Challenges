@@ -1,0 +1,110 @@
+# NET-01 — Unencrypted Secrets
+#
+# Verified against GZ::CTF 1.9.1 (commit 23ccbbaa), the same version used for
+# WEB-01..WEB-05 and REV-01..REV-02.
+#
+# CATEGORY NOTE: GZ::CTF 1.9.1 has no "Network" category. The verified
+# ChallengeCategory enum is:
+#   Misc, Crypto, Pwn, Web, Reverse, Blockchain, Forensics, Hardware, Mobile,
+#   PPC, AI, Pentest, OSINT        (src/GZCTF/Utils/Enums.cs)
+# This challenge is therefore configured as `Forensics`, the closest verified
+# value for packet-capture analysis. The participant-facing description still
+# presents it as network traffic analysis.
+#
+# GZ::CTF does not import challenge YAML: DynamicContainer challenges are created
+# through the admin UI or /api/Edit/Games/... . This file is the authoritative
+# value set for that configuration; every key under `gzctf` maps to a verified
+# 1.9.1 model property:
+#   ChallengeCategory.Forensics      -> Utils/Enums.cs
+#   ChallengeType.DynamicContainer   -> Utils/Enums.cs
+#   ContainerConfig.Image/ExposedPort/MemoryLimit/CPUCount/StorageLimit/NetworkMode
+#                                    -> Models/Internal/ContainerConfig.cs
+#   Challenge.Hints (List<string>)   -> Models/Data/Challenge.cs
+# This file contains no flag.
+
+id: NET-01
+name: Unencrypted Secrets
+author: AxumSec
+category: Forensics
+platform_category_note: "GZ::CTF 1.9.1 has no Network category; Forensics is used"
+type: DynamicContainer
+difficulty: Easy
+points: 100
+flag_format: "AXUM{...}"
+authentication: none
+
+public:
+  description: |
+    Meridian Logistics recovered a network capture from its internal
+    shipment-tracking environment.
+
+    The traffic contains several communication sessions between employees and
+    internal services.
+
+    Investigate the captured communication and determine whether sensitive
+    information was transmitted insecurely.
+
+    Recover the exposed authentication token.
+
+  hints:
+    - |
+      **Hint 1 — Identify the protocol**
+
+      Start by identifying the protocols present in the capture. Look for
+      traffic that is not protected by TLS.
+    - |
+      **Hint 2 — Inspect HTTP communication**
+
+      Wireshark can filter HTTP requests and display their headers. Look for
+      communication involving the Meridian portal.
+    - |
+      **Hint 3 — Follow the stream**
+
+      The information you need is part of an HTTP request header. Following the
+      relevant TCP stream should make it easier to inspect.
+
+gzctf:
+  # ChallengeCategory.Forensics (no Network category exists in 1.9.1)
+  category: Forensics
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double), not the
+  # display difficulty. 1.0 keeps the score flat.
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 100
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token
+  # (verified placeholder syntax for GZ::CTF 1.9.1).
+  flagTemplate: "AXUM{unencrypted_secrets_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/net-01-unencrypted-secrets:1.0.0"
+  # Port the download service listens on; GZ::CTF maps it to a random host port.
+  exposePort: 3000
+  # ContainerConfig.MemoryLimit / CPUCount / StorageLimit
+  memoryLimit: 128
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+
+  # Hints are plain markdown strings (Challenge.Hints is List<string>).
+  hints:
+    - |
+      **Hint 1 — Identify the protocol**
+
+      Start by identifying the protocols present in the capture. Look for
+      traffic that is not protected by TLS.
+    - |
+      **Hint 2 — Inspect HTTP communication**
+
+      Wireshark can filter HTTP requests and display their headers. Look for
+      communication involving the Meridian portal.
+    - |
+      **Hint 3 — Follow the stream**
+
+      The information you need is part of an HTTP request header. Following the
+      relevant TCP stream should make it easier to inspect.

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meridian Logistics — Network Capture Archive</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M2.5 8.5h19M2.5 15.5h19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M6.5 5 12 12l5.5 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>Meridian Logistics</strong>
+          <small>Shipment Tracking Platform</small>
+        </span>
+      </div>
+      <nav class="topnav" aria-label="Secondary">
+        <span>Capture archive · internal</span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Security review · archive</p>
+        <h1>Network Capture Archive</h1>
+        <p class="lede">
+          An archived traffic capture recovered from the Meridian internal shipment-tracking
+          environment. Review the captured communication and investigate whether sensitive
+          information was exposed.
+        </p>
+
+        <div class="availability">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Capture available for review</span>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Capture</h2>
+          <dl class="facts">
+            <div><dt>Name</dt><dd class="mono">meridian-traffic.pcap</dd></div>
+            <div><dt>Format</dt><dd>PCAP (libpcap) · Ethernet</dd></div>
+            <div><dt>Collected</dt><dd>28 October 2026, morning window</dd></div>
+            <div><dt>Source</dt><dd>Internal shipment-tracking segment</dd></div>
+          </dl>
+          <a class="download" href="/download" download="meridian-traffic.pcap">
+            Download capture
+          </a>
+          <p class="fineprint">
+            Each review copy is generated for the requesting environment. Re-downloading replaces
+            your previous archive.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Opening the capture</h2>
+          <ol class="steps">
+            <li>
+              <span class="step-label">Start Wireshark</span>
+              <code>wireshark meridian-traffic.pcap</code>
+            </li>
+            <li>
+              <span class="step-label">Or inspect it on the command line</span>
+              <code>tcpdump -nn -r meridian-traffic.pcap</code>
+            </li>
+            <li>
+              <span class="step-label">Identify the protocols in use</span>
+              <code>Statistics → Protocol Hierarchy</code>
+            </li>
+            <li>
+              <span class="step-label">Inspect a conversation</span>
+              <code>Right-click a packet → Follow → TCP Stream</code>
+            </li>
+          </ol>
+          <p class="fineprint">
+            The capture covers several sessions between employee workstations and internal
+            services. Reviewers should look at each conversation rather than a single packet.
+          </p>
+        </section>
+      </div>
+
+      <section class="notice">
+        <h2>Review scope</h2>
+        <p>
+          The archive was collected during the October security review of the shipment-tracking
+          environment. It contains ordinary business traffic from two workstations and the internal
+          reporting service.
+        </p>
+        <p>
+          The review question is whether any communication in this window carried information that
+          should have been protected. Report the exposed value through the usual channel.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Meridian Logistics · Platform Engineering</span>
+      <span>Internal review distribution</span>
+    </footer>
+  </body>
+</html>
