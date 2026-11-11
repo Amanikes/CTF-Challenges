@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackstone Commerce | Inventory Management Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="app-header">
+    <div class="header-inner container">
+      <div class="brand-group">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Blackstone Commerce</span>
+          <span class="brand-sub">Inventory & Supply Chain Portal</span>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span class="status-label">Database Connected</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content container">
+    <!-- Portal Banner -->
+    <section class="portal-banner">
+      <div class="banner-text">
+        <span class="kicker">Operational Catalog</span>
+        <h1>Product Inventory Directory</h1>
+        <p>Review real-time equipment availability, technical descriptions, and department allocations across distribution hubs.</p>
+      </div>
+      <div class="catalog-metrics">
+        <div class="metric-card">
+          <span class="metric-label">Items Loaded</span>
+          <span class="metric-value" id="metric-total">—</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Categories</span>
+          <span class="metric-value" id="metric-categories">—</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toolbar: Search & Category Filter -->
+    <section class="catalog-toolbar">
+      <div class="search-form-row">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-input" placeholder="Search products by keyword..." aria-label="Search products">
+          <button type="button" id="clear-search-btn" class="clear-btn" aria-label="Clear search" hidden>&times;</button>
+        </div>
+        <button type="button" id="search-btn" class="btn btn-primary">Search</button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">Reset</button>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-filter-wrapper">
+        <span class="filter-label">Filter by Category:</span>
+        <div class="category-pills" id="category-pills">
+          <button type="button" class="category-pill active" data-category="">All Categories</button>
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Status Bar -->
+    <div class="results-header">
+      <div class="results-count" id="results-count">Displaying inventory...</div>
+      <div class="view-controls">
+        <button type="button" id="view-grid-btn" class="view-btn active" title="Grid View" aria-label="Grid View">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </button>
+        <button type="button" id="view-table-btn" class="view-btn" title="Table View" aria-label="Table View">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Feedback States -->
+    <div id="state-loading" class="state-container loading-state" hidden>
+      <div class="spinner"></div>
+      <p>Retrieving product records from database...</p>
+    </div>
+
+    <div id="state-error" class="state-container error-state" hidden>
+      <div class="state-icon error-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h3 id="error-title">Search Request Error</h3>
+      <p id="error-message">Unable to complete the database query. Please refine your criteria and try again.</p>
+      <button type="button" id="error-retry-btn" class="btn btn-secondary">Reload Catalog</button>
+    </div>
+
+    <div id="state-empty" class="state-container empty-state" hidden>
+      <div class="state-icon empty-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+      </div>
+      <h3>No Inventory Records Found</h3>
+      <p>No products matched the selected filters. Verify search terms or clear active filters.</p>
+    </div>
+
+    <!-- Product Containers -->
+    <div id="product-grid" class="product-grid">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <div id="product-table-wrapper" class="product-table-wrapper" hidden>
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th class="col-id">Record ID</th>
+            <th class="col-name">Product Name</th>
+            <th class="col-category">Category</th>
+            <th class="col-description">Description</th>
+            <th class="col-price">Unit Price</th>
+            <th class="col-stock">Inventory</th>
+          </tr>
+        </thead>
+        <tbody id="product-table-body">
+          <!-- Injected via JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-inner container">
+      <div class="footer-copy">
+        &copy; 2026 Blackstone Commerce Ltd. Enterprise Inventory System.
+      </div>
+      <div class="footer-meta">
+        Internal Catalog Directory &bull; Release 2.4.0
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
