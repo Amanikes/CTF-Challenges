@@ -1,0 +1,124 @@
+# NET-03 — The Last Transmission
+#
+# Verified against GZ::CTF 1.9.1 (commit 23ccbbaa), the same version used for
+# NET-01, NET-02, WEB-01..WEB-05 and REV-01..REV-02.
+#
+# CATEGORY NOTE: GZ::CTF 1.9.1 has no "Network" category. The verified
+# ChallengeCategory enum is:
+#   Misc, Crypto, Pwn, Web, Reverse, Blockchain, Forensics, Hardware, Mobile,
+#   PPC, AI, Pentest, OSINT        (src/GZCTF/Utils/Enums.cs)
+# This challenge is configured as `Forensics`, consistent with NET-01/NET-02.
+#
+# GZ::CTF does not import challenge YAML: DynamicContainer challenges are created
+# through the admin UI or /api/Edit/Games/... . This file is the authoritative
+# value set for that configuration. Every key under `gzctf` maps to a verified
+# 1.9.1 model property:
+#   ChallengeCategory.Forensics      -> Utils/Enums.cs
+#   ChallengeType.DynamicContainer   -> Utils/Enums.cs
+#   ContainerConfig.Image/ExposedPort/MemoryLimit/CPUCount/StorageLimit/NetworkMode
+#                                    -> Models/Internal/ContainerConfig.cs
+#   Challenge.Hints (List<string>)   -> Models/Data/Challenge.cs
+# This file contains no flag.
+
+id: NET-03
+name: The Last Transmission
+author: AxumSec
+category: Forensics
+platform_category_note: "GZ::CTF 1.9.1 has no Network category; Forensics is used"
+type: DynamicContainer
+difficulty: Medium
+points: 150
+flag_format: "AXUM{...}"
+authentication: none
+
+public:
+  description: |
+    Asterion Technologies has reported a suspected data breach. One of its
+    internal workstations communicated with an unfamiliar external server
+    shortly before confidential information disappeared from the organisation's
+    systems.
+
+    The security team recovered a packet capture from the affected network
+    segment. It contains DNS lookups, HTTP requests and an unusual file
+    transfer. Individually these events appear relatively ordinary — together
+    they may reveal what happened.
+
+    Your mission is to reconstruct the communication, identify the suspicious
+    transfer, recover the transmitted archive, and investigate its contents to
+    uncover the hidden flag.
+
+  hints:
+    - |
+      **Hint 1 — DNS**
+
+      Begin by identifying unusual DNS queries. Determine which domain resolves
+      shortly before the suspicious communications begin.
+    - |
+      **Hint 2 — HTTP**
+
+      Look at HTTP requests and responses involving the IP address discovered
+      through DNS. Inspect the response bodies, not just the request URLs.
+    - |
+      **Hint 3 — FTP control**
+
+      FTP uses a control connection and a separate data connection. Follow the
+      control stream and inspect passive-mode negotiation.
+    - |
+      **Hint 4 — FTP data**
+
+      Look for the RETR command and reconstruct the corresponding TCP data
+      stream. The transferred file is a ZIP archive containing the final
+      evidence.
+
+gzctf:
+  # ChallengeCategory.Forensics (no Network category exists in 1.9.1)
+  category: Forensics
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double), not the
+  # display difficulty. 1.0 keeps the score flat.
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 150
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token
+  # (verified placeholder syntax for GZ::CTF 1.9.1).
+  flagTemplate: "AXUM{last_transmission_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/net-03-the-last-transmission:1.0.0"
+  # The application listens on 8080 by default (PORT); GZ::CTF maps this port to
+  # a random host port per instance.
+  exposePort: 8080
+  # ContainerConfig.MemoryLimit / CPUCount / StorageLimit
+  memoryLimit: 192
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+
+  # Hints are plain markdown strings (Challenge.Hints is List<string>).
+  hints:
+    - |
+      **Hint 1 — DNS**
+
+      Begin by identifying unusual DNS queries. Determine which domain resolves
+      shortly before the suspicious communications begin.
+    - |
+      **Hint 2 — HTTP**
+
+      Look at HTTP requests and responses involving the IP address discovered
+      through DNS. Inspect the response bodies, not just the request URLs.
+    - |
+      **Hint 3 — FTP control**
+
+      FTP uses a control connection and a separate data connection. Follow the
+      control stream and inspect passive-mode negotiation.
+    - |
+      **Hint 4 — FTP data**
+
+      Look for the RETR command and reconstruct the corresponding TCP data
+      stream. The transferred file is a ZIP archive containing the final
+      evidence.
