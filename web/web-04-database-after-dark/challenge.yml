@@ -1,0 +1,85 @@
+# WEB-04 — Database After Dark
+#
+# GZ::CTF does not import challenge YAML files: DynamicContainer challenges are
+# created through the administration UI or the `/api/Edit/Games/...` endpoints.
+# This file is the authoritative value set for that configuration. Every key
+# under `gzctf` maps to a verified GZ::CTF model property (v1.9.1).
+#
+# Score rationale (author decision): WEB-01..WEB-03 are 50 points because the
+# solve is a single well-known request. WEB-04 also ends in one request, but the
+# participant must first understand that the `category` filter is concatenated
+# into the statement and then build a UNION that matches the projected column
+# count, so it is rated one step higher. Change `points` here and
+# `originalScore` below together if the event wants a different curve.
+#
+# Do not treat this file as an importable package. It contains no flag.
+
+id: WEB-04
+name: Database After Dark
+category: Web
+type: DynamicContainer
+difficulty: Easy
+points: 100
+flag_format: "AXUM{...}"
+
+public:
+  description: |
+    ### Story
+
+    Blackstone Commerce runs a supplier inventory portal. The catalogue is busy,
+    the stock counts are accurate, and the category filter works exactly as
+    advertised.
+
+    The development team was asked for a progress update on the reporting
+    rewrite. They answered that "the old query layer is still in place for now".
+
+    ### Objective
+
+    Investigate how the portal talks to its database and recover the restricted
+    deployment record.
+
+gzctf:
+  # ChallengeType.DynamicContainer
+  type: DynamicContainer
+  # ChallengeCategory.Web
+  category: Web
+  # ChallengeUpdateModel.Difficulty is the score coefficient (double), not the
+  # display difficulty. 1.0 keeps the score flat.
+  difficulty: 1.0
+  isEnabled: true
+  originalScore: 100
+  minScoreRate: 1.0
+  submissionLimit: 0
+
+  # `[TEAM_HASH]` resolves to 12 hex characters derived from the team token.
+  flagTemplate: "AXUM{database_after_dark_[TEAM_HASH]}"
+
+  # Image must be pullable by the platform's container provider.
+  containerImage: "registry.axumsec.example/ctf/web-04-database-after-dark:1.0.0"
+  # Port the process listens on (`PORT`, default 3000); GZ::CTF maps it to a
+  # random host port.
+  exposePort: 3000
+  # ContainerConfig.MemoryLimit / CPUCount / StorageLimit
+  memoryLimit: 128
+  cpuCount: 1
+  storageLimit: 64
+  networkMode: Open
+  enableTrafficCapture: false
+
+  # Hints are plain markdown strings (Challenge.Hints is List<string>).
+  hints:
+    - |
+      **Hint 1 — The filter**
+
+      The catalogue offers a keyword search and a category filter. They do not
+      reach the database the same way. Compare what each one accepts.
+    - |
+      **Hint 2 — Server-side assembly**
+
+      If a filter value is assembled into a SQL statement instead of being
+      passed as a parameter, the server is treating your input as SQL.
+    - |
+      **Hint 3 — Reading another table**
+
+      The search projects a fixed set of columns. If you can add a row of your
+      own, you can choose which other table supplies the values.
